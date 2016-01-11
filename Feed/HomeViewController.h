@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LoginViewController.h"
+#import "PostTableCell.h"
 
 @interface HomeViewController : UIViewController
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66AFE7681C443ECE008341B1 /* PostTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 66AFE7671C443ECE008341B1 /* PostTableCell.m */; };
 		66B16A711C402EA800B4F3EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B16A701C402EA800B4F3EA /* main.m */; };
 		66B16A741C402EA800B4F3EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B16A731C402EA800B4F3EA /* AppDelegate.m */; };
 		66B16A771C402EA800B4F3EA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B16A761C402EA800B4F3EA /* LoginViewController.m */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		66AFE7661C443ECE008341B1 /* PostTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableCell.h; sourceTree = "<group>"; };
+		66AFE7671C443ECE008341B1 /* PostTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableCell.m; sourceTree = "<group>"; };
 		66B16A6C1C402EA800B4F3EA /* Feed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Feed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B16A701C402EA800B4F3EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		66B16A721C402EA800B4F3EA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -90,6 +93,8 @@
 		66B16A631C402EA800B4F3EA = {
 			isa = PBXGroup;
 			children = (
+				66AFE7661C443ECE008341B1 /* PostTableCell.h */,
+				66AFE7671C443ECE008341B1 /* PostTableCell.m */,
 				66B16A6E1C402EA800B4F3EA /* Feed */,
 				66B16A881C402EA800B4F3EA /* FeedTests */,
 				66B16A931C402EA800B4F3EA /* FeedUITests */,
@@ -289,6 +294,7 @@
 				66B16AAA1C4057BD00B4F3EA /* Post.m in Sources */,
 				66B16A741C402EA800B4F3EA /* AppDelegate.m in Sources */,
 				66B16A711C402EA800B4F3EA /* main.m in Sources */,
+				66AFE7681C443ECE008341B1 /* PostTableCell.m in Sources */,
 				66B16AA71C40482C00B4F3EA /* HomeViewController.m in Sources */,
 				66B16AA41C40307700B4F3EA /* APIClient.m in Sources */,
 			);
@@ -514,6 +520,7 @@
 				66B16A9B1C402EA800B4F3EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		66B16A9C1C402EA800B4F3EA /* Build configuration list for PBXNativeTarget "FeedTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +529,7 @@
 				66B16A9E1C402EA800B4F3EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		66B16A9F1C402EA800B4F3EA /* Build configuration list for PBXNativeTarget "FeedUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +538,7 @@
 				66B16AA11C402EA800B4F3EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

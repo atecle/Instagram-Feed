@@ -25,10 +25,10 @@ NSString * const LoginViewControllerIdentifier = @"LoginViewController";
     [super viewDidLoad];
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleDone target:self action:@selector(cancelButtonPressed)];
-    
     self.navigationItem.leftBarButtonItem = cancelButton;
-    NSLog(@"%@", [APIClient generateURLForAuthentication].absoluteString);
+    
     self.webView.delegate = self;
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:[APIClient generateURLForAuthentication]];
     [self.webView loadRequest:request];
 }

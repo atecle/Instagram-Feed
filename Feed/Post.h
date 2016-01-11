@@ -12,8 +12,12 @@
 @interface Post : NSObject
 
 @property (strong, nonatomic, readonly) NSString *userName, *caption;
-@property (strong, nonatomic, readonly) UIImage *image;
-@property (copy, nonatomic, readonly) NSArray *comments;
+@property (strong, nonatomic, readonly) NSURL *avatarURL, *imageURL;
 @property (nonatomic, readonly) NSInteger likes;
+
++ (NSArray *) postsFromPostDictionaries:(NSArray *)postDictionaries;
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
 
 @end
