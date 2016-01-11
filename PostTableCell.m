@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarPhotoImageView;
 @property (weak, nonatomic) IBOutlet UILabel *likesLabel;
+@property (weak, nonatomic) IBOutlet UIButton *actionSheetButton;
 
 @end
 
@@ -50,6 +51,11 @@
 {
     [self.photoImageView setImage:nil];
     [self.avatarPhotoImageView setImage:nil];
+}
+
+- (IBAction)actionSheetButtonPressed:(id)sender
+{
+    [self.delegate postTableCellDidPressActionButton:self];
 }
 
 @end

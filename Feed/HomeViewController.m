@@ -10,7 +10,7 @@
 
 static NSString * const PostCellIdentifier = @"PostCell";
 
-@interface HomeViewController () <LoginViewControllerDelegate, UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface HomeViewController () <LoginViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, PostTableCellDelegate>
 @property (strong, nonatomic) NSString *accessToken;
 @property (strong, nonatomic) APIClient *client;
 @property (copy, nonatomic) NSArray *posts;
@@ -63,23 +63,13 @@ static NSString * const PostCellIdentifier = @"PostCell";
 {
     
     [self.client requestRecentMediaWithSuccess:^(NSArray *posts) {
-     
+        
         self.posts = posts;
         [self.tableView reloadData];
     } failure:^(NSError *error) {
         NSLog(@"%@", error);
     }];
     
-}
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1)
-    {
-        [self showLoginViewController];
-    }
 }
 
 #pragma mark - LoginViewControllerDelegate
@@ -93,14 +83,10 @@ static NSString * const PostCellIdentifier = @"PostCell";
     [self loadFeed];
     
 }
-
 - (void)loginViewController:(LoginViewController *)loginViewController didFailToLoginWithError:(NSString *)error
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Failure", nil) message:NSLocalizedString(@"Failed to get access token. Try again?", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"No", nil) otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
-    [alert show];
+    
 }
-
-#pragma mark - UITableViewDelegate
 
 #pragma mark - UITableViewDataSource
 
@@ -115,6 +101,7 @@ static NSString * const PostCellIdentifier = @"PostCell";
     
     Post *post = [self.posts objectAtIndex:indexPath.row];
     [cell setPost:post];
+    cell.delegate = self;
     
     __weak PostTableCell *weakCell = cell;
     [self.client downloadImageFromURL:post.imageURL withSuccess:^(UIImage *image) {
@@ -132,6 +119,28 @@ static NSString * const PostCellIdentifier = @"PostCell";
     }];
     
     return cell;
+}
+
+#pragma mark - PostTableCellDelegate
+
+- (void)postTableCellDidPressActionButton:(PostTableCell *)cell
+{
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *reportAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Report", nil) style:UIAlertActionStyleDestructive handler:nil];
+    UIAlertAction *facebookShareAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Share To Facebook", nil) style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *tweetAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Tweet", nil) style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *copyShareAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Copy Share URL", nil) style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+    
+    [actionSheet addAction:reportAction];
+    [actionSheet addAction:facebookShareAction];
+    [actionSheet addAction:tweetAction];
+    [actionSheet addAction:copyShareAction];
+    [actionSheet addAction:cancelAction];
+    
+
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 

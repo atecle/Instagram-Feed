@@ -9,11 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "Post.h"
 
+@class PostTableCell;
+
+@protocol PostTableCellDelegate <NSObject>
+
+- (void)postTableCellDidPressActionButton: (PostTableCell *)cell;
+
+@end
+
 @interface PostTableCell : UITableViewCell
+
+@property (weak, nonatomic) id<PostTableCellDelegate> delegate;
 
 @property (weak, nonatomic) Post *post;
 
-- (void) configureForPost:(Post *)post;
+- (void)configureForPost:(Post *)post;
 - (void)setPhoto:(UIImage *)photo forPost:(Post *)post;
 - (void)setAvatarPhoto:(UIImage *)avatarPhoto forPost:(Post *)post;
 
