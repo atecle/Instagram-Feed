@@ -8,12 +8,14 @@
 
 #import "PostTableCell.h"
 
+NSString * const PostCellIdentifier = @"PostCell";
+
 @interface PostTableCell()
-@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
-@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarPhotoImageView;
-@property (weak, nonatomic) IBOutlet UILabel *likesLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
 @property (weak, nonatomic) IBOutlet UIButton *actionSheetButton;
+@property (weak, nonatomic) IBOutlet UILabel *likesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 
 @end
 

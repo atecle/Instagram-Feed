@@ -43,7 +43,7 @@ NSString * const APIClientErrorDomain = @"APIClientErrorDomain";
 
 + (NSURL *)generateURLForAuthentication
 {
-    NSString *fullPath = [NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@://%@&response_type=token", BaseURL, ClientID, InstagramRedirectScheme, InstagramRedirectHost];
+    NSString *fullPath = [NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@://%@&response_type=token&scope=public_content", BaseURL, ClientID, InstagramRedirectScheme, InstagramRedirectHost];
     return [NSURL URLWithString:fullPath];
 }
 
@@ -84,6 +84,8 @@ NSString * const APIClientErrorDomain = @"APIClientErrorDomain";
         NSError *JSONError = nil;
         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&JSONError];
         
+        //we check if dictionary is nil because it's a better indication of whether or not there is an error.
+        //NSURLSession is a well behaved api in that the error will always be populated if there is an error, so we could check that, but some other apis may populate the nserror with junk data even though the dictionary has info in it
         if (dictionary == nil)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -135,6 +137,76 @@ NSString * const APIClientErrorDomain = @"APIClientErrorDomain";
     
     [downloadTask resume];
 }
+
+- (NSURLSessionDataTask *)requestRecentlyTaggedMedia: (NSString *) tag withSuccess:(void (^)(NSArray *feedEntries))success failure:(void (^)(NSError *error))failure
+{
+    NSString *fullPath = [NSString stringWithFormat:@"https://api.instagram.com/v1/tags/%@/media/recent?access_token=%@", tag, self.accessToken];
+    
+    NSMutableURLRequest *URLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:fullPath]];
+    
+    NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:URLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (error != nil)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(error);
+            });
+            return;
+        }
+        
+        NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
+        if (HTTPResponse.statusCode < 200 || HTTPResponse.statusCode > 299)
+        {
+            NSError *error = [NSError errorWithDomain:APIClientErrorDomain code:APIClientErrorCodeServerError userInfo:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(error);
+            });
+            return;
+        }
+        
+        if (![[HTTPResponse.allHeaderFields objectForKey:@"Content-Type"] hasPrefix:@"application/json"])
+        {
+            NSError *error = [NSError errorWithDomain:APIClientErrorDomain code:APIClientErrorCodeServerError userInfo:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(error);
+            });
+            return;
+        }
+        
+        NSError *JSONError = nil;
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&JSONError];
+        
+        if (dictionary == nil)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(JSONError);
+            });
+            return;
+        }
+        
+        NSArray *postDictionaries = [dictionary objectForKey:@"data"];
+        NSArray *posts = [Post postsFromPostDictionaries:postDictionaries];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            success(posts);
+        });
+    }];
+    
+    [dataTask resume];
+    
+    return dataTask;
+}
+
+- (void)requestRecentMediaWithLocationID:(NSInteger )locationID success:(void (^)(NSArray *feedEntries))success failure:(void (^)(NSError *error))failure
+{
+    
+}
+
+- (void)requestRecentMediaWithLatitude:(double )latitude longitude: (double) longitude success:(void (^)(NSArray *feedEntries))success failure:(void (^)(NSError *error))failure
+{
+    
+}
+
 
 
 @end

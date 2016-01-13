@@ -1,104 +1,74 @@
 //
-//  HomeViewController.m
+//  TagSearchViewController.m
 //  Feed
 //
-//  Created by Adam on 1/8/16.
-//  Copyright © 2016 atecle. All rights reserved.
+//  Created by Adam on 1/12/16.
+//  Copyright © 2016 ;. All rights reserved.
 //
 
-#import "HomeViewController.h"
+#import "TagSearchViewController.h"
 
-@interface HomeViewController () <LoginViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, PostTableCellDelegate>
-@property (strong, nonatomic) NSString *accessToken;
-@property (strong, nonatomic) APIClient *client;
-@property (copy, nonatomic) NSArray *posts;
+NSString * const TagSearchViewControllerIdentifier = @"TagSearchViewController";
+
+@interface TagSearchViewController () <UITableViewDataSource, UITableViewDelegate, PostTableCellDelegate, UISearchBarDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (copy, nonatomic) NSArray *posts;
+@property (strong, nonatomic) APIClient *client;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
+@property (weak, nonatomic) NSURLSessionDataTask *dataTask;
+@property (strong, nonatomic) NSTimer *timer;
 
 @end
 
-@implementation HomeViewController
+@implementation TagSearchViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([PostTableCell class]) bundle:nil] forCellReuseIdentifier:PostCellIdentifier];
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *accessToken = [userDefaults stringForKey:@"accessToken"];
-    
-    if (accessToken == nil)
-    {
-        [self showLoginViewController];
-    }
-    else
-    {
-        _client = [[APIClient alloc] initWithAccessToken:accessToken];
-        [self loadFeed];
-    }
-    
-    self.accessToken = accessToken;
-    
+        
+    self.posts = @[];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([PostTableCell class]) bundle: nil] forCellReuseIdentifier:PostCellIdentifier];
+    self.searchBar.delegate = self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void) showLoginViewController
+- (void)setAPIClient:(APIClient *)client
 {
-    LoginViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:LoginViewControllerIdentifier];
-    vc.delegate = self;
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:navigationController animated:YES completion:nil];
+    self.client = client;
 }
 
-- (void) loadFeed
+- (void)searchForTag:(NSString *)tag
 {
-    [self.client requestRecentMediaWithSuccess:^(NSArray *posts) {
-        
-        self.posts = posts;
+    
+    if (tag.length == 0)
+    {
+        self.posts = @[];
         [self.tableView reloadData];
+        return;
+    }
+    
+    [self.dataTask cancel];
+    __weak TagSearchViewController *weakSelf = self;
+    self.dataTask = [self.client requestRecentlyTaggedMedia:tag withSuccess:^(NSArray *feedEntries) {
+        __strong TagSearchViewController *strongSelf = weakSelf;
+        strongSelf.posts = feedEntries;
+        [strongSelf.tableView reloadData];
     } failure:^(NSError *error) {
         NSLog(@"%@", error);
     }];
 }
 
-- (IBAction)tagsButtonPressed:(id)sender
+- (void)searchTimerFired:(NSTimer *)timer
 {
-    TagSearchViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:TagSearchViewControllerIdentifier];
-    
-    [vc setAPIClient:self.client];
-    
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (IBAction)locationsButtonPressed:(id)sender
-{
-    LocationSearchViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:LocationViewControllerIdentifier];
-    
-}
-
-#pragma mark - LoginViewControllerDelegate
-
-- (void)loginViewController:(LoginViewController *)loginViewController didLoginWithAccessToken:(NSString *)accessToken
-{
-    [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:@"accessToken"];
-    _accessToken = accessToken;
-    _client = [[APIClient alloc] initWithAccessToken:self.accessToken];
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [self loadFeed];
-    
-}
-
-- (void)loginViewController:(LoginViewController *)loginViewController didFailToLoginWithError:(NSString *)error
-{
-    
+    NSString *tag = timer.userInfo;
+    [self searchForTag:tag];
 }
 
 #pragma mark - UITableViewDataSource
@@ -107,6 +77,7 @@
 {
     return [self.posts count];
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -152,10 +123,17 @@
     [actionSheet addAction:copyShareAction];
     [actionSheet addAction:cancelAction];
     
-
+    
     [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    [self.timer invalidate];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(searchTimerFired:) userInfo:searchBar.text repeats:NO];
+}
 
 
 @end

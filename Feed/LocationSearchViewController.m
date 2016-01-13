@@ -1,104 +1,49 @@
 //
-//  HomeViewController.m
+//  LocationSearchViewController.m
 //  Feed
 //
-//  Created by Adam on 1/8/16.
+//  Created by Adam on 1/12/16.
 //  Copyright © 2016 atecle. All rights reserved.
 //
 
-#import "HomeViewController.h"
+#import "LocationSearchViewController.h"
 
-@interface HomeViewController () <LoginViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, PostTableCellDelegate>
-@property (strong, nonatomic) NSString *accessToken;
-@property (strong, nonatomic) APIClient *client;
-@property (copy, nonatomic) NSArray *posts;
+NSString * const LocationSearchViewControllerIdentifier = @"LocationSearchViewController";
+
+@interface LocationSearchViewController () <UITableViewDataSource, UITableViewDelegate, PostTableCellDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (copy, nonatomic) NSArray *posts;
+@property (strong, nonatomic) APIClient *client;
 
 @end
 
-@implementation HomeViewController
+@implementation LocationSearchViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([PostTableCell class]) bundle:nil] forCellReuseIdentifier:PostCellIdentifier];
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *accessToken = [userDefaults stringForKey:@"accessToken"];
     
-    if (accessToken == nil)
-    {
-        [self showLoginViewController];
-    }
-    else
-    {
-        _client = [[APIClient alloc] initWithAccessToken:accessToken];
-        [self loadFeed];
-    }
-    
-    self.accessToken = accessToken;
-    
+    [self loadFeed];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void) showLoginViewController
+- (void)setAPIClient:(APIClient *)client
 {
-    LoginViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:LoginViewControllerIdentifier];
-    vc.delegate = self;
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:navigationController animated:YES completion:nil];
+    _client = client;
 }
 
-- (void) loadFeed
-{
-    [self.client requestRecentMediaWithSuccess:^(NSArray *posts) {
-        
-        self.posts = posts;
-        [self.tableView reloadData];
-    } failure:^(NSError *error) {
-        NSLog(@"%@", error);
-    }];
-}
-
-- (IBAction)tagsButtonPressed:(id)sender
-{
-    TagSearchViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:TagSearchViewControllerIdentifier];
-    
-    [vc setAPIClient:self.client];
-    
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (IBAction)locationsButtonPressed:(id)sender
-{
-    LocationSearchViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:LocationViewControllerIdentifier];
-    
-}
-
-#pragma mark - LoginViewControllerDelegate
-
-- (void)loginViewController:(LoginViewController *)loginViewController didLoginWithAccessToken:(NSString *)accessToken
-{
-    [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:@"accessToken"];
-    _accessToken = accessToken;
-    _client = [[APIClient alloc] initWithAccessToken:self.accessToken];
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [self loadFeed];
-    
-}
-
-- (void)loginViewController:(LoginViewController *)loginViewController didFailToLoginWithError:(NSString *)error
+- (void)loadFeed
 {
     
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -152,10 +97,9 @@
     [actionSheet addAction:copyShareAction];
     [actionSheet addAction:cancelAction];
     
-
+    
     [self presentViewController:actionSheet animated:YES completion:nil];
 }
-
 
 
 @end

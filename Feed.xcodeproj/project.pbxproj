@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		668057B21C4572C400A9A7DA /* TagSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 668057B11C4572C400A9A7DA /* TagSearchViewController.m */; };
+		668057B71C458BBC00A9A7DA /* PostTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 668057B61C458BBC00A9A7DA /* PostTableCell.xib */; };
+		668057BA1C45A25200A9A7DA /* LocationSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 668057B91C45A25200A9A7DA /* LocationSearchViewController.m */; };
+		668057BD1C45A59800A9A7DA /* SearchByLocationTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 668057BC1C45A59800A9A7DA /* SearchByLocationTask.m */; };
 		66AFE7681C443ECE008341B1 /* PostTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 66AFE7671C443ECE008341B1 /* PostTableCell.m */; };
 		66B16A711C402EA800B4F3EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B16A701C402EA800B4F3EA /* main.m */; };
 		66B16A741C402EA800B4F3EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B16A731C402EA800B4F3EA /* AppDelegate.m */; };
@@ -39,8 +43,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		66AFE7661C443ECE008341B1 /* PostTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableCell.h; sourceTree = "<group>"; };
-		66AFE7671C443ECE008341B1 /* PostTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableCell.m; sourceTree = "<group>"; };
+		668057B01C4572C400A9A7DA /* TagSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagSearchViewController.h; sourceTree = "<group>"; };
+		668057B11C4572C400A9A7DA /* TagSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagSearchViewController.m; sourceTree = "<group>"; };
+		668057B61C458BBC00A9A7DA /* PostTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostTableCell.xib; sourceTree = "<group>"; };
+		668057B81C45A25200A9A7DA /* LocationSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSearchViewController.h; sourceTree = "<group>"; };
+		668057B91C45A25200A9A7DA /* LocationSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSearchViewController.m; sourceTree = "<group>"; };
+		668057BB1C45A59800A9A7DA /* SearchByLocationTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchByLocationTask.h; sourceTree = "<group>"; };
+		668057BC1C45A59800A9A7DA /* SearchByLocationTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchByLocationTask.m; sourceTree = "<group>"; };
+		66AFE7661C443ECE008341B1 /* PostTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostTableCell.h; path = ../PostTableCell.h; sourceTree = "<group>"; };
+		66AFE7671C443ECE008341B1 /* PostTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostTableCell.m; path = ../PostTableCell.m; sourceTree = "<group>"; };
 		66B16A6C1C402EA800B4F3EA /* Feed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Feed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B16A701C402EA800B4F3EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		66B16A721C402EA800B4F3EA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -90,11 +101,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		66B16A631C402EA800B4F3EA = {
+		668057AC1C456E9600A9A7DA /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				66B16A781C402EA800B4F3EA /* Main.storyboard */,
+				66B16A751C402EA800B4F3EA /* LoginViewController.h */,
+				66B16A761C402EA800B4F3EA /* LoginViewController.m */,
+				668057B01C4572C400A9A7DA /* TagSearchViewController.h */,
+				668057B11C4572C400A9A7DA /* TagSearchViewController.m */,
+				66B16AA51C40482C00B4F3EA /* HomeViewController.h */,
+				66B16AA61C40482C00B4F3EA /* HomeViewController.m */,
+				668057BB1C45A59800A9A7DA /* SearchByLocationTask.h */,
+				668057BC1C45A59800A9A7DA /* SearchByLocationTask.m */,
+				668057B81C45A25200A9A7DA /* LocationSearchViewController.h */,
+				668057B91C45A25200A9A7DA /* LocationSearchViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		668057AD1C456EA100A9A7DA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				66B16AA81C4057BD00B4F3EA /* Post.h */,
+				66B16AA91C4057BD00B4F3EA /* Post.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		668057AE1C456EB600A9A7DA /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				66B16AA21C40307700B4F3EA /* APIClient.h */,
+				66B16AA31C40307700B4F3EA /* APIClient.m */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		668057AF1C456EBC00A9A7DA /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				66AFE7661C443ECE008341B1 /* PostTableCell.h */,
 				66AFE7671C443ECE008341B1 /* PostTableCell.m */,
+				668057B61C458BBC00A9A7DA /* PostTableCell.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		66B16A631C402EA800B4F3EA = {
+			isa = PBXGroup;
+			children = (
 				66B16A6E1C402EA800B4F3EA /* Feed */,
 				66B16A881C402EA800B4F3EA /* FeedTests */,
 				66B16A931C402EA800B4F3EA /* FeedUITests */,
@@ -115,20 +170,10 @@
 		66B16A6E1C402EA800B4F3EA /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				66B16A721C402EA800B4F3EA /* AppDelegate.h */,
-				66B16A731C402EA800B4F3EA /* AppDelegate.m */,
-				66B16A751C402EA800B4F3EA /* LoginViewController.h */,
-				66B16A761C402EA800B4F3EA /* LoginViewController.m */,
-				66B16AA81C4057BD00B4F3EA /* Post.h */,
-				66B16AA91C4057BD00B4F3EA /* Post.m */,
-				66B16A781C402EA800B4F3EA /* Main.storyboard */,
-				66B16AA51C40482C00B4F3EA /* HomeViewController.h */,
-				66B16AA61C40482C00B4F3EA /* HomeViewController.m */,
-				66B16AA21C40307700B4F3EA /* APIClient.h */,
-				66B16AA31C40307700B4F3EA /* APIClient.m */,
-				66B16A7B1C402EA800B4F3EA /* Assets.xcassets */,
-				66B16A7D1C402EA800B4F3EA /* LaunchScreen.storyboard */,
-				66B16A801C402EA800B4F3EA /* Info.plist */,
+				668057AF1C456EBC00A9A7DA /* Views */,
+				668057AE1C456EB600A9A7DA /* Networking */,
+				668057AD1C456EA100A9A7DA /* Models */,
+				668057AC1C456E9600A9A7DA /* View Controllers */,
 				66B16A6F1C402EA800B4F3EA /* Supporting Files */,
 			);
 			path = Feed;
@@ -137,7 +182,12 @@
 		66B16A6F1C402EA800B4F3EA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				66B16A721C402EA800B4F3EA /* AppDelegate.h */,
+				66B16A731C402EA800B4F3EA /* AppDelegate.m */,
 				66B16A701C402EA800B4F3EA /* main.m */,
+				66B16A7B1C402EA800B4F3EA /* Assets.xcassets */,
+				66B16A7D1C402EA800B4F3EA /* LaunchScreen.storyboard */,
+				66B16A801C402EA800B4F3EA /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -266,6 +316,7 @@
 				66B16A7F1C402EA800B4F3EA /* LaunchScreen.storyboard in Resources */,
 				66B16A7C1C402EA800B4F3EA /* Assets.xcassets in Resources */,
 				66B16A7A1C402EA800B4F3EA /* Main.storyboard in Resources */,
+				668057B71C458BBC00A9A7DA /* PostTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +346,9 @@
 				66B16A741C402EA800B4F3EA /* AppDelegate.m in Sources */,
 				66B16A711C402EA800B4F3EA /* main.m in Sources */,
 				66AFE7681C443ECE008341B1 /* PostTableCell.m in Sources */,
+				668057B21C4572C400A9A7DA /* TagSearchViewController.m in Sources */,
+				668057BD1C45A59800A9A7DA /* SearchByLocationTask.m in Sources */,
+				668057BA1C45A25200A9A7DA /* LocationSearchViewController.m in Sources */,
 				66B16AA71C40482C00B4F3EA /* HomeViewController.m in Sources */,
 				66B16AA41C40307700B4F3EA /* APIClient.m in Sources */,
 			);

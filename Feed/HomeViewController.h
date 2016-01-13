@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "LoginViewController.h"
 #import "PostTableCell.h"
+#import "TagSearchViewController.h"
+#import "LocationSearchViewController.h"
 
 @interface HomeViewController : UIViewController
 

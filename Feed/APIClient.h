@@ -27,5 +27,9 @@ typedef NS_ENUM(NSInteger, APIClientErrorCode)
 - (instancetype) initWithAccessToken:(NSString *)accessToken;
 - (void)downloadImageFromURL:(NSURL *)URL withSuccess:(void (^)(UIImage *))success failure:( void (^)(NSError *))failure;
 - (void)requestRecentMediaWithSuccess:(void (^)(NSArray *feedEntries))success failure:(void (^)(NSError *error))failure;
+- (NSURLSessionDataTask *)requestRecentlyTaggedMedia: (NSString *) tag withSuccess:(void (^)(NSArray *feedEntries))success failure:(void (^)(NSError *error))failure;
+- (void)requestRecentMediaWithLocationID:(NSInteger )locationID success:(void (^)(NSArray *feedEntries))success failure:(void (^)(NSError *error))failure;
+- (void)requestRecentMediaWithLatitude:(double )latitude longitude: (double) longitude success:(void (^)(NSArray *feedEntries))success failure:(void (^)(NSError *error))failure;
+
 
 @end

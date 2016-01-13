@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Post.h"
 
+extern NSString * const PostCellIdentifier;
+
 @class PostTableCell;
 
 @protocol PostTableCellDelegate <NSObject>
