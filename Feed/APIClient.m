@@ -197,16 +197,119 @@ NSString * const APIClientErrorDomain = @"APIClientErrorDomain";
     return dataTask;
 }
 
-- (void)requestRecentMediaWithLocationID:(NSInteger )locationID success:(void (^)(NSArray *feedEntries))success failure:(void (^)(NSError *error))failure
+- (void)requestRecentMediaWithLocationID:(NSString *)locationID success:(void (^)(NSArray *feedEntries))success failure:(void (^)(NSError *error))failure
 {
+    NSString *fullPath = [NSString stringWithFormat:@"https://api.instagram.com/v1/locations/%@/media/recent?access_token=%@", locationID, self.accessToken];
     
+    NSMutableURLRequest *URLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:fullPath]];
+    
+    NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:URLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error != nil)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(error);
+            });
+            return;
+        }
+        
+        NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
+        
+        if (HTTPResponse.statusCode < 200 || HTTPResponse.statusCode > 299)
+        {
+            NSError *error = [NSError errorWithDomain:APIClientErrorDomain code:APIClientErrorCodeServerError userInfo:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(error);
+            });
+            return;
+        }
+        
+        if (![[HTTPResponse.allHeaderFields objectForKey:@"Content-Type"] hasPrefix:@"application/json"])
+        {
+            NSError *error = [NSError errorWithDomain:APIClientErrorDomain code:APIClientErrorCodeServerError userInfo:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(error);
+            });
+            return;
+        }
+        
+        NSError *JSONError = nil;
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&JSONError];
+        
+        if (data == nil)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(JSONError);
+            });
+            return;
+        }
+        
+        NSArray *postDictionaries = [dictionary objectForKey:@"data"];
+        NSArray *posts = [Post postsFromPostDictionaries:postDictionaries];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            success(posts);
+        });
+
+
+    }];
+    
+    [dataTask resume];
 }
 
-- (void)requestRecentMediaWithLatitude:(double )latitude longitude: (double) longitude success:(void (^)(NSArray *feedEntries))success failure:(void (^)(NSError *error))failure
+- (void)requestLocationIDWithLatitude:(float)latitude longitude: (float) longitude success:(void (^)(NSString *locationID))success failure:(void (^)(NSError *error))failure
 {
+    NSString *fullPath = [NSString stringWithFormat:@"https://api.instagram.com/v1/locations/search?lat=%@&lng=%@&access_token=%@", [NSString stringWithFormat:@"%f", latitude], [NSString stringWithFormat:@"%f", longitude], self.accessToken];
     
+    NSMutableURLRequest *URLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:fullPath]];
+    
+    NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:URLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (error != nil)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(error);
+            });
+            return;
+        }
+        
+        NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
+        
+        if (HTTPResponse.statusCode < 200 || HTTPResponse.statusCode > 299)
+        {
+            NSError *error = [NSError errorWithDomain:APIClientErrorDomain code:APIClientErrorCodeServerError userInfo:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(error);
+            });
+            return;
+        }
+        
+        if (![[HTTPResponse.allHeaderFields objectForKey:@"Content-Type"] hasPrefix:@"application/json"])
+        {
+            NSError *error = [NSError errorWithDomain:APIClientErrorDomain code:APIClientErrorCodeServerError userInfo:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(error);
+            });
+            return;
+        }
+        
+        NSError *JSONError = nil;
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&JSONError];
+        
+        if (data == nil)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(JSONError);
+            });
+            return;
+        }
+        
+        NSArray *postDictionaries = dictionary[@"data"];
+        
+        NSString *locationID = [postDictionaries firstObject][@"id"];
+        success(locationID);
+    }];
+    
+    [dataTask resume];
 }
-
-
 
 @end

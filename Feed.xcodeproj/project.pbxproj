@@ -10,7 +10,9 @@
 		668057B21C4572C400A9A7DA /* TagSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 668057B11C4572C400A9A7DA /* TagSearchViewController.m */; };
 		668057B71C458BBC00A9A7DA /* PostTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 668057B61C458BBC00A9A7DA /* PostTableCell.xib */; };
 		668057BA1C45A25200A9A7DA /* LocationSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 668057B91C45A25200A9A7DA /* LocationSearchViewController.m */; };
-		668057BD1C45A59800A9A7DA /* SearchByLocationTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 668057BC1C45A59800A9A7DA /* SearchByLocationTask.m */; };
+		669986321C46D05B00DEFF7F /* GETOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 669986311C46D05B00DEFF7F /* GETOperation.m */; };
+		669986351C46DABD00DEFF7F /* MediaFromLocationGETOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 669986341C46DABD00DEFF7F /* MediaFromLocationGETOperation.m */; };
+		669986381C46E2F400DEFF7F /* LocationGETOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 669986371C46E2F400DEFF7F /* LocationGETOperation.m */; };
 		66AFE7681C443ECE008341B1 /* PostTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 66AFE7671C443ECE008341B1 /* PostTableCell.m */; };
 		66B16A711C402EA800B4F3EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B16A701C402EA800B4F3EA /* main.m */; };
 		66B16A741C402EA800B4F3EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B16A731C402EA800B4F3EA /* AppDelegate.m */; };
@@ -48,8 +50,12 @@
 		668057B61C458BBC00A9A7DA /* PostTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostTableCell.xib; sourceTree = "<group>"; };
 		668057B81C45A25200A9A7DA /* LocationSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSearchViewController.h; sourceTree = "<group>"; };
 		668057B91C45A25200A9A7DA /* LocationSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSearchViewController.m; sourceTree = "<group>"; };
-		668057BB1C45A59800A9A7DA /* SearchByLocationTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchByLocationTask.h; sourceTree = "<group>"; };
-		668057BC1C45A59800A9A7DA /* SearchByLocationTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchByLocationTask.m; sourceTree = "<group>"; };
+		669986301C46D05B00DEFF7F /* GETOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GETOperation.h; sourceTree = "<group>"; };
+		669986311C46D05B00DEFF7F /* GETOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GETOperation.m; sourceTree = "<group>"; };
+		669986331C46DABD00DEFF7F /* MediaFromLocationGETOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaFromLocationGETOperation.h; sourceTree = "<group>"; };
+		669986341C46DABD00DEFF7F /* MediaFromLocationGETOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaFromLocationGETOperation.m; sourceTree = "<group>"; };
+		669986361C46E2F400DEFF7F /* LocationGETOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationGETOperation.h; sourceTree = "<group>"; };
+		669986371C46E2F400DEFF7F /* LocationGETOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationGETOperation.m; sourceTree = "<group>"; };
 		66AFE7661C443ECE008341B1 /* PostTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostTableCell.h; path = ../PostTableCell.h; sourceTree = "<group>"; };
 		66AFE7671C443ECE008341B1 /* PostTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostTableCell.m; path = ../PostTableCell.m; sourceTree = "<group>"; };
 		66B16A6C1C402EA800B4F3EA /* Feed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Feed.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,8 +117,6 @@
 				668057B11C4572C400A9A7DA /* TagSearchViewController.m */,
 				66B16AA51C40482C00B4F3EA /* HomeViewController.h */,
 				66B16AA61C40482C00B4F3EA /* HomeViewController.m */,
-				668057BB1C45A59800A9A7DA /* SearchByLocationTask.h */,
-				668057BC1C45A59800A9A7DA /* SearchByLocationTask.m */,
 				668057B81C45A25200A9A7DA /* LocationSearchViewController.h */,
 				668057B91C45A25200A9A7DA /* LocationSearchViewController.m */,
 			);
@@ -124,6 +128,12 @@
 			children = (
 				66B16AA81C4057BD00B4F3EA /* Post.h */,
 				66B16AA91C4057BD00B4F3EA /* Post.m */,
+				669986361C46E2F400DEFF7F /* LocationGETOperation.h */,
+				669986371C46E2F400DEFF7F /* LocationGETOperation.m */,
+				669986331C46DABD00DEFF7F /* MediaFromLocationGETOperation.h */,
+				669986341C46DABD00DEFF7F /* MediaFromLocationGETOperation.m */,
+				669986301C46D05B00DEFF7F /* GETOperation.h */,
+				669986311C46D05B00DEFF7F /* GETOperation.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -342,12 +352,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				66B16A771C402EA800B4F3EA /* LoginViewController.m in Sources */,
+				669986381C46E2F400DEFF7F /* LocationGETOperation.m in Sources */,
 				66B16AAA1C4057BD00B4F3EA /* Post.m in Sources */,
 				66B16A741C402EA800B4F3EA /* AppDelegate.m in Sources */,
 				66B16A711C402EA800B4F3EA /* main.m in Sources */,
+				669986351C46DABD00DEFF7F /* MediaFromLocationGETOperation.m in Sources */,
 				66AFE7681C443ECE008341B1 /* PostTableCell.m in Sources */,
 				668057B21C4572C400A9A7DA /* TagSearchViewController.m in Sources */,
-				668057BD1C45A59800A9A7DA /* SearchByLocationTask.m in Sources */,
+				669986321C46D05B00DEFF7F /* GETOperation.m in Sources */,
 				668057BA1C45A25200A9A7DA /* LocationSearchViewController.m in Sources */,
 				66B16AA71C40482C00B4F3EA /* HomeViewController.m in Sources */,
 				66B16AA41C40307700B4F3EA /* APIClient.m in Sources */,

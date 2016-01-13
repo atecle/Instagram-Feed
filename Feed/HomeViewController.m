@@ -80,8 +80,10 @@
 
 - (IBAction)locationsButtonPressed:(id)sender
 {
-    LocationSearchViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:LocationViewControllerIdentifier];
-    
+    LocationSearchViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:LocationSearchViewControllerIdentifier];
+
+    [vc setAPIClient:self.client];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - LoginViewControllerDelegate

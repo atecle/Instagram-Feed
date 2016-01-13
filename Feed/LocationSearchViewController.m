@@ -15,7 +15,7 @@ NSString * const LocationSearchViewControllerIdentifier = @"LocationSearchViewCo
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (copy, nonatomic) NSArray *posts;
 @property (strong, nonatomic) APIClient *client;
-
+@property (strong, nonatomic) NSOperationQueue *operationQueue;
 @end
 
 @implementation LocationSearchViewController
@@ -26,6 +26,43 @@ NSString * const LocationSearchViewControllerIdentifier = @"LocationSearchViewCo
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([PostTableCell class]) bundle:nil] forCellReuseIdentifier:PostCellIdentifier];
+    
+    LocationGETOperation *location = [[LocationGETOperation alloc] initWithClient:self.client];
+    MediaFromLocationGETOperation *media = [[MediaFromLocationGETOperation alloc] initWithClient:self.client];
+    
+    NSArray *coords = [self getLatitudeAndLongitude];
+    NSNumber *latitude = [coords firstObject];
+    NSNumber *longitude = [coords lastObject];
+    [location setLatitude:[latitude floatValue]];
+    [location setLongitude: [longitude floatValue]];
+    
+    __weak typeof(location) weakLocation = location;
+    __weak typeof(media) weakMedia = media;
+    location.completionBlock = ^{
+        
+        __strong typeof(weakLocation) strongLocation = weakLocation;
+        __strong typeof(media) strongMedia = weakMedia;
+        [strongMedia setLocationID:strongLocation.locationID];
+    };
+    
+    __weak typeof(self) weakSelf = self;
+    media.completionBlock = ^{
+        
+        __strong typeof(self) strongSelf = weakSelf;
+        __strong typeof(media) strongMedia = weakMedia;
+        
+        strongSelf.posts = strongMedia.posts;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self loadFeed];
+        });
+    };
+    
+    [media addGETDependency: location];
+    
+    _operationQueue = [[NSOperationQueue alloc] init];
+    [self.operationQueue addOperation:location];
+    [self.operationQueue addOperation: media];
     
     [self loadFeed];
 }
@@ -42,8 +79,20 @@ NSString * const LocationSearchViewControllerIdentifier = @"LocationSearchViewCo
 
 - (void)loadFeed
 {
-    
     [self.tableView reloadData];
+}
+
+- (NSArray *)getLatitudeAndLongitude
+{
+    CLLocationManager *locationManager;
+
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+    [locationManager startUpdatingLocation];
+    NSNumber *latitude = [NSNumber numberWithFloat:locationManager.location.coordinate.latitude];
+    NSNumber *longitude = [NSNumber numberWithFloat:locationManager.location.coordinate.longitude];
+    return @[latitude, longitude];
 }
 
 #pragma mark - UITableViewDataSource

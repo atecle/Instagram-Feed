@@ -7,12 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+
 #import "Post.h"
 #import "PostTableCell.h"
 #import "APIClient.h"
+#import "LocationGETOperation.h"
+#import "MediaFromLocationGETOperation.h"
 
 extern NSString * const LocationSearchViewControllerIdentifier;
 
 @interface LocationSearchViewController : UIViewController
+
+- (void)setAPIClient:(APIClient *)client;
 
 @end
