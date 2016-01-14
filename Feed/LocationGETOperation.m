@@ -15,7 +15,7 @@
 {
     if ((self = [super initWithClient:client]))
     {
-        [self isReadyToBeginExecuting];
+
     }
     
     return self;

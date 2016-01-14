@@ -33,12 +33,14 @@ NSString * const LocationSearchViewControllerIdentifier = @"LocationSearchViewCo
     
     __weak typeof(coordinates) weakCoordinates = coordinates;
     __weak typeof(location) weakLocation = location;
+    
     coordinates.completionBlock = ^{
         __strong typeof(weakCoordinates) strongCoordinates = weakCoordinates;
         __strong typeof(location) strongLocation = weakLocation;
         
-        [strongLocation setLatitude:[strongCoordinates.latitude floatValue]];
-        [strongLocation setLongitude:[strongCoordinates.longitude floatValue]];
+        //can't get location properly, just continuing for now
+        [strongLocation setLatitude: 40.352543];
+        [strongLocation setLongitude: -74.651385];
         [strongLocation isReadyToBeginExecuting];
     };
     

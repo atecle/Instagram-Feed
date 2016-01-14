@@ -39,11 +39,15 @@
     self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
     self.locationManager.delegate = self;
     
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+    {
         [self.locationManager requestWhenInUseAuthorization];
     }
     
     [self.locationManager startUpdatingLocation];
+    
+    //Something is fucked up and the delegate method isn't being called,  continuing for now so I can make progress.
+    [self didFinishExecuting];
     
 }
 
@@ -108,6 +112,11 @@
     [self setLongitude:longitude];
     
     [self didFinishExecuting];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"%@", error);
 }
 
 
