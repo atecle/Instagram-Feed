@@ -235,7 +235,7 @@ NSString * const APIClientErrorDomain = @"APIClientErrorDomain";
         NSError *JSONError = nil;
         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&JSONError];
         
-        if (data == nil)
+        if (dictionary == nil)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 failure(JSONError);
@@ -306,7 +306,11 @@ NSString * const APIClientErrorDomain = @"APIClientErrorDomain";
         NSArray *postDictionaries = dictionary[@"data"];
         
         NSString *locationID = [postDictionaries firstObject][@"id"];
-        success(locationID);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            success(locationID);
+        });
+        
     }];
     
     [dataTask resume];

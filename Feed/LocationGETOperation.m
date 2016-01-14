@@ -13,7 +13,12 @@
 
 - (instancetype) initWithClient:(APIClient *)client
 {
-    return [super initWithClient:client];
+    if ((self = [super initWithClient:client]))
+    {
+        [self isReadyToBeginExecuting];
+    }
+    
+    return self;
 }
 
 - (void)main
@@ -25,6 +30,7 @@
     } failure:^(NSError *error) {
         NSLog(@"%@", error);
     }];
+    
     [self didBeginExecuting];
 }
 

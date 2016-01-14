@@ -26,11 +26,13 @@
     }];
     
     [self didBeginExecuting];
+    
 }
 
 - (void)setLocationID:(NSString *)locationID
 {
     _locationID = locationID;
+    [self isReadyToBeginExecuting];
 }
 
 @end

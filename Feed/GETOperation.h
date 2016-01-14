@@ -18,8 +18,9 @@
 @property (strong, nonatomic, readonly) APIClient *client;
 
 - (instancetype) initWithClient:(APIClient *)client;
-- (void) addGETDependency:(GETOperation *)op;
-
+- (void) addOpDependency:(NSOperation *)op;
 - (void)didBeginExecuting;
 - (void)didFinishExecuting;
+- (void)isReadyToBeginExecuting;
+
 @end

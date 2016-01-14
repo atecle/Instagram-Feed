@@ -25,6 +25,7 @@
 		66B16AA41C40307700B4F3EA /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B16AA31C40307700B4F3EA /* APIClient.m */; };
 		66B16AA71C40482C00B4F3EA /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B16AA61C40482C00B4F3EA /* HomeViewController.m */; };
 		66B16AAA1C4057BD00B4F3EA /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B16AA91C4057BD00B4F3EA /* Post.m */; };
+		66CA3B0E1C48084300918138 /* CurrentCoordinatesOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CA3B0D1C48084300918138 /* CurrentCoordinatesOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 		66B16AA61C40482C00B4F3EA /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		66B16AA81C4057BD00B4F3EA /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		66B16AA91C4057BD00B4F3EA /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		66CA3B0C1C48084300918138 /* CurrentCoordinatesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentCoordinatesOperation.h; sourceTree = "<group>"; };
+		66CA3B0D1C48084300918138 /* CurrentCoordinatesOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentCoordinatesOperation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,12 +131,6 @@
 			children = (
 				66B16AA81C4057BD00B4F3EA /* Post.h */,
 				66B16AA91C4057BD00B4F3EA /* Post.m */,
-				669986361C46E2F400DEFF7F /* LocationGETOperation.h */,
-				669986371C46E2F400DEFF7F /* LocationGETOperation.m */,
-				669986331C46DABD00DEFF7F /* MediaFromLocationGETOperation.h */,
-				669986341C46DABD00DEFF7F /* MediaFromLocationGETOperation.m */,
-				669986301C46D05B00DEFF7F /* GETOperation.h */,
-				669986311C46D05B00DEFF7F /* GETOperation.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -184,6 +181,7 @@
 				668057AE1C456EB600A9A7DA /* Networking */,
 				668057AD1C456EA100A9A7DA /* Models */,
 				668057AC1C456E9600A9A7DA /* View Controllers */,
+				66CA3B0B1C4807A000918138 /* Operations */,
 				66B16A6F1C402EA800B4F3EA /* Supporting Files */,
 			);
 			path = Feed;
@@ -218,6 +216,21 @@
 				66B16A961C402EA800B4F3EA /* Info.plist */,
 			);
 			path = FeedUITests;
+			sourceTree = "<group>";
+		};
+		66CA3B0B1C4807A000918138 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				669986361C46E2F400DEFF7F /* LocationGETOperation.h */,
+				669986371C46E2F400DEFF7F /* LocationGETOperation.m */,
+				669986331C46DABD00DEFF7F /* MediaFromLocationGETOperation.h */,
+				669986341C46DABD00DEFF7F /* MediaFromLocationGETOperation.m */,
+				669986301C46D05B00DEFF7F /* GETOperation.h */,
+				669986311C46D05B00DEFF7F /* GETOperation.m */,
+				66CA3B0C1C48084300918138 /* CurrentCoordinatesOperation.h */,
+				66CA3B0D1C48084300918138 /* CurrentCoordinatesOperation.m */,
+			);
+			name = Operations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,6 +369,7 @@
 				66B16AAA1C4057BD00B4F3EA /* Post.m in Sources */,
 				66B16A741C402EA800B4F3EA /* AppDelegate.m in Sources */,
 				66B16A711C402EA800B4F3EA /* main.m in Sources */,
+				66CA3B0E1C48084300918138 /* CurrentCoordinatesOperation.m in Sources */,
 				669986351C46DABD00DEFF7F /* MediaFromLocationGETOperation.m in Sources */,
 				66AFE7681C443ECE008341B1 /* PostTableCell.m in Sources */,
 				668057B21C4572C400A9A7DA /* TagSearchViewController.m in Sources */,

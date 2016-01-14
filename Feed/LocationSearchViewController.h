@@ -12,6 +12,7 @@
 #import "Post.h"
 #import "PostTableCell.h"
 #import "APIClient.h"
+#import "CurrentCoordinatesOperation.h"
 #import "LocationGETOperation.h"
 #import "MediaFromLocationGETOperation.h"
 

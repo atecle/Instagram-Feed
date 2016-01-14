@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) BOOL isFinished;
 @property (nonatomic, assign) BOOL isExecuting;
+@property (nonatomic, assign) BOOL isReady;
 
 @end
 
@@ -33,7 +34,7 @@
     
 }
 
-- (void) addGETDependency:(GETOperation *)op
+- (void) addOpDependency:(NSOperation *)op
 {
     [self addDependency:op];
     _dependentOperations = [self.dependentOperations arrayByAddingObject:op];
@@ -59,6 +60,15 @@
     _isExecuting = YES;
     
     [self didChangeValueForKey:@"isExecuting"];
+}
+
+- (void)isReadyToBeginExecuting
+{
+    [self willChangeValueForKey:@"isReady"];
+    
+    _isReady = YES;
+    
+    [self didChangeValueForKey:@"isReady"];
 }
 
 
