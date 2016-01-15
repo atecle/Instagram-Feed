@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString * const CameraViewControllerIdentifier;
+extern NSString * const PhotoViewControllerIdentifier;
 
-@interface CameraViewController : UIViewController
+@interface PhotoViewController : UIViewController
 
 @end

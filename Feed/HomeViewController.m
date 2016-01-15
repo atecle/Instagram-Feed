@@ -71,7 +71,7 @@
 }
 - (IBAction)cameraButtonPressed:(id)sender
 {
-    CameraViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:CameraViewControllerIdentifier];
+    PhotoViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:PhotoViewControllerIdentifier];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
     

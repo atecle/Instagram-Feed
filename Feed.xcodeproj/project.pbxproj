@@ -26,7 +26,7 @@
 		66B16AA71C40482C00B4F3EA /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B16AA61C40482C00B4F3EA /* HomeViewController.m */; };
 		66B16AAA1C4057BD00B4F3EA /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B16AA91C4057BD00B4F3EA /* Post.m */; };
 		66CA3B0E1C48084300918138 /* CurrentCoordinatesOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CA3B0D1C48084300918138 /* CurrentCoordinatesOperation.m */; };
-		66D055D21C495790000722D1 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66D055D11C495790000722D1 /* CameraViewController.m */; };
+		66D055D21C495790000722D1 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66D055D11C495790000722D1 /* PhotoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,8 +84,8 @@
 		66B16AA91C4057BD00B4F3EA /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		66CA3B0C1C48084300918138 /* CurrentCoordinatesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentCoordinatesOperation.h; sourceTree = "<group>"; };
 		66CA3B0D1C48084300918138 /* CurrentCoordinatesOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentCoordinatesOperation.m; sourceTree = "<group>"; };
-		66D055D01C495790000722D1 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
-		66D055D11C495790000722D1 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		66D055D01C495790000722D1 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		66D055D11C495790000722D1 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,8 +125,8 @@
 				66B16AA61C40482C00B4F3EA /* HomeViewController.m */,
 				668057B81C45A25200A9A7DA /* LocationSearchViewController.h */,
 				668057B91C45A25200A9A7DA /* LocationSearchViewController.m */,
-				66D055D01C495790000722D1 /* CameraViewController.h */,
-				66D055D11C495790000722D1 /* CameraViewController.m */,
+				66D055D01C495790000722D1 /* PhotoViewController.h */,
+				66D055D11C495790000722D1 /* PhotoViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -374,7 +374,7 @@
 				66B16AAA1C4057BD00B4F3EA /* Post.m in Sources */,
 				66B16A741C402EA800B4F3EA /* AppDelegate.m in Sources */,
 				66B16A711C402EA800B4F3EA /* main.m in Sources */,
-				66D055D21C495790000722D1 /* CameraViewController.m in Sources */,
+				66D055D21C495790000722D1 /* PhotoViewController.m in Sources */,
 				66CA3B0E1C48084300918138 /* CurrentCoordinatesOperation.m in Sources */,
 				669986351C46DABD00DEFF7F /* MediaFromLocationGETOperation.m in Sources */,
 				66AFE7681C443ECE008341B1 /* PostTableCell.m in Sources */,

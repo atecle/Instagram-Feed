@@ -39,10 +39,10 @@
             </objects>
             <point key="canvasLocation" x="1778" y="1245"/>
         </scene>
-        <!--Camera View Controller-->
+        <!--Photo View Controller-->
         <scene sceneID="aAi-3S-OhL">
             <objects>
-                <viewController storyboardIdentifier="CameraViewController" id="6XK-Gn-E4m" customClass="CameraViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoViewController" id="6XK-Gn-E4m" customClass="PhotoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="c18-id-UZu"/>
                         <viewControllerLayoutGuide type="bottom" id="UBU-5x-atJ"/>
