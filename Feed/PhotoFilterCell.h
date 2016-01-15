@@ -14,6 +14,6 @@ extern NSString * const PhotoFilterCellIdentifier;
 
 @property (strong, nonatomic, readonly) UIImage *image;
 
-- (void)configureForImage:(UIImage *)image;
+- (void)configureForImage:(UIImage *)image withFilter:(NSString *)filter;
 
 @end

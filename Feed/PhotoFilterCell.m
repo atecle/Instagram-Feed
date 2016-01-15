@@ -19,10 +19,17 @@ NSString * const PhotoFilterCellIdentifier = @"PhotoFilterCell";
 
 @implementation PhotoFilterCell
 
-
-- (void)configureForImage:(UIImage *)image
+- (void)awakeFromNib
+{
+    [super awakeFromNib  ];
+    self.imageView.layer.cornerRadius = 10;
+    self.imageView.layer.masksToBounds = YES;
+    
+}
+- (void)configureForImage:(UIImage *)image withFilter:(NSString *)filter
 {
     [self.imageView setImage:image];
+    [self.filterLabel setText:filter];
 }
 
 @end

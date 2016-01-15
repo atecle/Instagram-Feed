@@ -10,6 +10,8 @@
 
 NSString * const PhotoViewControllerIdentifier = @"PhotoViewController";
 
+static NSInteger Margin = 20;
+
 @interface PhotoViewController() <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -30,7 +32,14 @@ NSString * const PhotoViewControllerIdentifier = @"PhotoViewController";
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
+    self.collectionView.showsHorizontalScrollIndicator = NO;
     
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setSectionInset:UIEdgeInsetsMake(Margin, Margin, Margin, Margin)];
+    flowLayout.itemSize = CGSizeMake(self.collectionView.bounds.size.width/5, self.collectionView.bounds.size.height - (2*Margin));
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    
+    self.collectionView.collectionViewLayout = flowLayout;
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([PhotoFilterCell class]) bundle:nil] forCellWithReuseIdentifier:PhotoFilterCellIdentifier];
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
@@ -41,8 +50,6 @@ NSString * const PhotoViewControllerIdentifier = @"PhotoViewController";
     {
         [self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     }
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,7 +94,7 @@ NSString * const PhotoViewControllerIdentifier = @"PhotoViewController";
 {
     PhotoFilterCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:PhotoFilterCellIdentifier forIndexPath:indexPath];
     
-    [cell configureForImage:self.image];
+    [cell configureForImage:self.image withFilter:NSLocalizedString(@"Filter", nil)];
     
     return cell;
 }
