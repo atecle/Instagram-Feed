@@ -39,6 +39,24 @@
             </objects>
             <point key="canvasLocation" x="1778" y="1245"/>
         </scene>
+        <!--Camera View Controller-->
+        <scene sceneID="aAi-3S-OhL">
+            <objects>
+                <viewController storyboardIdentifier="CameraViewController" id="6XK-Gn-E4m" customClass="CameraViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="c18-id-UZu"/>
+                        <viewControllerLayoutGuide type="bottom" id="UBU-5x-atJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RH5-Yt-Aq1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b9d-sL-QhW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2577" y="1245"/>
+        </scene>
         <!--Location Search View Controller-->
         <scene sceneID="E4Y-sS-P2t">
             <objects>
@@ -88,13 +106,28 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N54-72-0eB">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="eyT-18-KZc"/>
+                                    <barButtonItem title="Camera" id="qQd-Wd-ua0">
+                                        <connections>
+                                            <action selector="cameraButtonPressed:" destination="HUv-yD-iI9" id="FeR-ST-Whk"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="XhY-rX-tGI"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="TnX-eX-qDT" firstAttribute="top" secondItem="fOY-3j-6xz" secondAttribute="bottom" id="16s-fR-EOH"/>
                             <constraint firstItem="e70-8S-HzQ" firstAttribute="top" secondItem="TnX-eX-qDT" secondAttribute="bottom" id="42u-Uc-uFL"/>
+                            <constraint firstItem="e70-8S-HzQ" firstAttribute="top" secondItem="N54-72-0eB" secondAttribute="bottom" id="Beb-Cy-Q2G"/>
                             <constraint firstItem="TnX-eX-qDT" firstAttribute="leading" secondItem="kuS-7T-HjM" secondAttribute="leading" id="Cbi-y9-Bas"/>
+                            <constraint firstAttribute="trailing" secondItem="N54-72-0eB" secondAttribute="trailing" id="Tge-Zz-sMT"/>
                             <constraint firstAttribute="trailing" secondItem="TnX-eX-qDT" secondAttribute="trailing" id="ZCR-w1-JtH"/>
+                            <constraint firstItem="N54-72-0eB" firstAttribute="leading" secondItem="kuS-7T-HjM" secondAttribute="leading" id="gJp-yJ-41S"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="7g3-8r-teZ">
@@ -110,6 +143,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cameraButton" destination="qQd-Wd-ua0" id="3Ql-aw-Y64"/>
                         <outlet property="tableView" destination="TnX-eX-qDT" id="uZq-Gi-SqH"/>
                     </connections>
                 </viewController>

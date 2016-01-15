@@ -11,6 +11,7 @@
 #import "PostTableCell.h"
 #import "TagSearchViewController.h"
 #import "LocationSearchViewController.h"
+#import "CameraViewController.h"
 
 @interface HomeViewController : UIViewController
 

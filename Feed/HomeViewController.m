@@ -13,6 +13,7 @@
 @property (strong, nonatomic) APIClient *client;
 @property (copy, nonatomic) NSArray *posts;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
 
 @end
 
@@ -67,6 +68,15 @@
     } failure:^(NSError *error) {
         NSLog(@"%@", error);
     }];
+}
+- (IBAction)cameraButtonPressed:(id)sender
+{
+    CameraViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:CameraViewControllerIdentifier];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    [self presentViewController:navigationController animated:YES completion:nil];
+    
 }
 
 - (IBAction)tagsButtonPressed:(id)sender
