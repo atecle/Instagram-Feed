@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhotoFilterCell.h"
 
 extern NSString * const PhotoViewControllerIdentifier;
 

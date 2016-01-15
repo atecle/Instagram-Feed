@@ -27,6 +27,8 @@
 		66B16AAA1C4057BD00B4F3EA /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B16AA91C4057BD00B4F3EA /* Post.m */; };
 		66CA3B0E1C48084300918138 /* CurrentCoordinatesOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CA3B0D1C48084300918138 /* CurrentCoordinatesOperation.m */; };
 		66D055D21C495790000722D1 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66D055D11C495790000722D1 /* PhotoViewController.m */; };
+		66D055D51C496460000722D1 /* PhotoFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 66D055D41C496460000722D1 /* PhotoFilterCell.m */; };
+		66D055D71C4964AC000722D1 /* PhotoFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66D055D61C4964AB000722D1 /* PhotoFilterCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,9 @@
 		66CA3B0D1C48084300918138 /* CurrentCoordinatesOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentCoordinatesOperation.m; sourceTree = "<group>"; };
 		66D055D01C495790000722D1 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
 		66D055D11C495790000722D1 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
+		66D055D31C496460000722D1 /* PhotoFilterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoFilterCell.h; sourceTree = "<group>"; };
+		66D055D41C496460000722D1 /* PhotoFilterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoFilterCell.m; sourceTree = "<group>"; };
+		66D055D61C4964AB000722D1 /* PhotoFilterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoFilterCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +160,9 @@
 				66AFE7661C443ECE008341B1 /* PostTableCell.h */,
 				66AFE7671C443ECE008341B1 /* PostTableCell.m */,
 				668057B61C458BBC00A9A7DA /* PostTableCell.xib */,
+				66D055D31C496460000722D1 /* PhotoFilterCell.h */,
+				66D055D41C496460000722D1 /* PhotoFilterCell.m */,
+				66D055D61C4964AB000722D1 /* PhotoFilterCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -342,6 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66B16A7F1C402EA800B4F3EA /* LaunchScreen.storyboard in Resources */,
+				66D055D71C4964AC000722D1 /* PhotoFilterCell.xib in Resources */,
 				66B16A7C1C402EA800B4F3EA /* Assets.xcassets in Resources */,
 				66B16A7A1C402EA800B4F3EA /* Main.storyboard in Resources */,
 				668057B71C458BBC00A9A7DA /* PostTableCell.xib in Resources */,
@@ -375,6 +384,7 @@
 				66B16A741C402EA800B4F3EA /* AppDelegate.m in Sources */,
 				66B16A711C402EA800B4F3EA /* main.m in Sources */,
 				66D055D21C495790000722D1 /* PhotoViewController.m in Sources */,
+				66D055D51C496460000722D1 /* PhotoFilterCell.m in Sources */,
 				66CA3B0E1C48084300918138 /* CurrentCoordinatesOperation.m in Sources */,
 				669986351C46DABD00DEFF7F /* MediaFromLocationGETOperation.m in Sources */,
 				66AFE7681C443ECE008341B1 /* PostTableCell.m in Sources */,

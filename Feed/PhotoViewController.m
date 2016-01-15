@@ -10,7 +10,10 @@
 
 NSString * const PhotoViewControllerIdentifier = @"PhotoViewController";
 
-@interface PhotoViewController() <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface PhotoViewController() <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) UIImagePickerController *imagePickerController;
@@ -24,6 +27,11 @@ NSString * const PhotoViewControllerIdentifier = @"PhotoViewController";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([PhotoFilterCell class]) bundle:nil] forCellWithReuseIdentifier:PhotoFilterCellIdentifier];
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
@@ -62,6 +70,9 @@ NSString * const PhotoViewControllerIdentifier = @"PhotoViewController";
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     
     self.image = chosenImage;
+    [self.collectionView reloadData];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -69,5 +80,27 @@ NSString * const PhotoViewControllerIdentifier = @"PhotoViewController";
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+#pragma mark - UICollectionViewDataSource
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    PhotoFilterCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:PhotoFilterCellIdentifier forIndexPath:indexPath];
+    
+    [cell configureForImage:self.image];
+    
+    return cell;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 20;
+}
+
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.imageView setImage:self.image];
+}
 
 @end
