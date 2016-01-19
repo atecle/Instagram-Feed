@@ -25,6 +25,7 @@ NSString * const LocationSearchViewControllerIdentifier = @"LocationSearchViewCo
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.title = NSLocalizedString(@"Locations", nil);
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([PostTableCell class]) bundle:nil] forCellReuseIdentifier:PostCellIdentifier];
     
     CurrentCoordinatesOperation *coordinates = [[CurrentCoordinatesOperation alloc] init];
@@ -89,6 +90,11 @@ NSString * const LocationSearchViewControllerIdentifier = @"LocationSearchViewCo
 - (void)loadFeed
 {
     [self.tableView reloadData];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - UITableViewDataSource

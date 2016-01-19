@@ -16,15 +16,32 @@ NSString * const PostCellIdentifier = @"PostCell";
 @property (weak, nonatomic) IBOutlet UIButton *actionSheetButton;
 @property (weak, nonatomic) IBOutlet UILabel *likesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *likesTextLabel;
 
 @end
 
 @implementation PostTableCell
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    self.avatarPhotoImageView.layer.cornerRadius = self.avatarPhotoImageView.bounds.size.width / 2.0;
+    self.avatarPhotoImageView.layer.masksToBounds = YES;
+}
+
+
 - (void) configureForPost:(Post *)post
 {
     self.userNameLabel.text = post.userName;
     self.likesLabel.text = [NSString stringWithFormat:@"%ld", (long)post.likes];
+    if (post.likes == 1)
+    {
+        self.likesTextLabel.text = NSLocalizedString(@"like", nil);
+    }
+    else
+    {
+        self.likesTextLabel.text = NSLocalizedString(@"likes", nil);
+    }
 }
 
 - (void) setPost:(Post *)post

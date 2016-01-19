@@ -28,7 +28,9 @@ NSString * const TagSearchViewControllerIdentifier = @"TagSearchViewController";
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-        
+    self.title = NSLocalizedString(@"Tags", nil);
+
+    
     self.posts = @[];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([PostTableCell class]) bundle: nil] forCellReuseIdentifier:PostCellIdentifier];
     self.searchBar.delegate = self;
@@ -69,6 +71,11 @@ NSString * const TagSearchViewControllerIdentifier = @"TagSearchViewController";
 {
     NSString *tag = timer.userInfo;
     [self searchForTag:tag];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - UITableViewDataSource

@@ -29,6 +29,9 @@
 		66D055D21C495790000722D1 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66D055D11C495790000722D1 /* PhotoViewController.m */; };
 		66D055D51C496460000722D1 /* PhotoFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 66D055D41C496460000722D1 /* PhotoFilterCell.m */; };
 		66D055D71C4964AC000722D1 /* PhotoFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66D055D61C4964AB000722D1 /* PhotoFilterCell.xib */; };
+		66DE922D1C4EB42000694E7A /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DE922C1C4EB42000694E7A /* NavigationController.m */; };
+		66DE92301C4EC29900694E7A /* CameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DE922F1C4EC29900694E7A /* CameraView.m */; };
+		66DE92321C4EC38400694E7A /* CameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66DE92311C4EC38400694E7A /* CameraView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +94,11 @@
 		66D055D31C496460000722D1 /* PhotoFilterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoFilterCell.h; sourceTree = "<group>"; };
 		66D055D41C496460000722D1 /* PhotoFilterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoFilterCell.m; sourceTree = "<group>"; };
 		66D055D61C4964AB000722D1 /* PhotoFilterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoFilterCell.xib; sourceTree = "<group>"; };
+		66DE922B1C4EB42000694E7A /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
+		66DE922C1C4EB42000694E7A /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
+		66DE922E1C4EC29900694E7A /* CameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraView.h; sourceTree = "<group>"; };
+		66DE922F1C4EC29900694E7A /* CameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraView.m; sourceTree = "<group>"; };
+		66DE92311C4EC38400694E7A /* CameraView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +140,8 @@
 				668057B91C45A25200A9A7DA /* LocationSearchViewController.m */,
 				66D055D01C495790000722D1 /* PhotoViewController.h */,
 				66D055D11C495790000722D1 /* PhotoViewController.m */,
+				66DE922B1C4EB42000694E7A /* NavigationController.h */,
+				66DE922C1C4EB42000694E7A /* NavigationController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -163,6 +173,9 @@
 				66D055D31C496460000722D1 /* PhotoFilterCell.h */,
 				66D055D41C496460000722D1 /* PhotoFilterCell.m */,
 				66D055D61C4964AB000722D1 /* PhotoFilterCell.xib */,
+				66DE922E1C4EC29900694E7A /* CameraView.h */,
+				66DE922F1C4EC29900694E7A /* CameraView.m */,
+				66DE92311C4EC38400694E7A /* CameraView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -313,6 +326,7 @@
 				TargetAttributes = {
 					66B16A6B1C402EA800B4F3EA = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 3GR96D7Z4R;
 					};
 					66B16A841C402EA800B4F3EA = {
 						CreatedOnToolsVersion = 7.2;
@@ -352,6 +366,7 @@
 				66B16A7F1C402EA800B4F3EA /* LaunchScreen.storyboard in Resources */,
 				66D055D71C4964AC000722D1 /* PhotoFilterCell.xib in Resources */,
 				66B16A7C1C402EA800B4F3EA /* Assets.xcassets in Resources */,
+				66DE92321C4EC38400694E7A /* CameraView.xib in Resources */,
 				66B16A7A1C402EA800B4F3EA /* Main.storyboard in Resources */,
 				668057B71C458BBC00A9A7DA /* PostTableCell.xib in Resources */,
 			);
@@ -380,9 +395,11 @@
 			files = (
 				66B16A771C402EA800B4F3EA /* LoginViewController.m in Sources */,
 				669986381C46E2F400DEFF7F /* LocationGETOperation.m in Sources */,
+				66DE92301C4EC29900694E7A /* CameraView.m in Sources */,
 				66B16AAA1C4057BD00B4F3EA /* Post.m in Sources */,
 				66B16A741C402EA800B4F3EA /* AppDelegate.m in Sources */,
 				66B16A711C402EA800B4F3EA /* main.m in Sources */,
+				66DE922D1C4EB42000694E7A /* NavigationController.m in Sources */,
 				66D055D21C495790000722D1 /* PhotoViewController.m in Sources */,
 				66D055D51C496460000722D1 /* PhotoFilterCell.m in Sources */,
 				66CA3B0E1C48084300918138 /* CurrentCoordinatesOperation.m in Sources */,
@@ -531,6 +548,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Feed/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.atecle.Feed;
@@ -542,6 +560,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Feed/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.atecle.Feed;

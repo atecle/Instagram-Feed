@@ -25,6 +25,7 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([PostTableCell class]) bundle:nil] forCellReuseIdentifier:PostCellIdentifier];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -73,7 +74,7 @@
 {
     PhotoViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:PhotoViewControllerIdentifier];
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+    NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:vc];
     
     [self presentViewController:navigationController animated:YES completion:nil];
     
@@ -94,6 +95,11 @@
 
     [vc setAPIClient:self.client];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - LoginViewControllerDelegate

@@ -12,13 +12,13 @@ NSString * const PhotoViewControllerIdentifier = @"PhotoViewController";
 
 static NSInteger Margin = 20;
 
-@interface PhotoViewController() <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface PhotoViewController() <UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
-@property (strong, nonatomic) UIImage *image;
-@property (strong, nonatomic) UIImagePickerController *imagePickerController;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
+
+@property (weak, nonatomic) IBOutlet CameraView *cameraView;
 
 
 @end
@@ -34,22 +34,18 @@ static NSInteger Margin = 20;
     self.collectionView.delegate = self;
     self.collectionView.showsHorizontalScrollIndicator = NO;
     
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleDone target:self action:@selector(cancelButtonPressed)];
+    self.title = NSLocalizedString(@"Filters", nil);
+    
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setSectionInset:UIEdgeInsetsMake(Margin, Margin, Margin, Margin)];
-    flowLayout.itemSize = CGSizeMake(self.collectionView.bounds.size.width/5, self.collectionView.bounds.size.height - (2*Margin));
+    flowLayout.itemSize = CGSizeMake(self.collectionView.bounds.size.width/9, self.collectionView.bounds.size.height - (3*Margin));
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
     self.collectionView.collectionViewLayout = flowLayout;
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([PhotoFilterCell class]) bundle:nil] forCellWithReuseIdentifier:PhotoFilterCellIdentifier];
-    
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-    {
-        [self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
-    }
-    else
-    {
-        [self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,16 +53,10 @@ static NSInteger Margin = 20;
     [super didReceiveMemoryWarning];
 }
 
-- (void)showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType
+
+- (IBAction)cancelButtonPressed
 {
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.allowsEditing = YES;
-    imagePickerController.delegate = self;
-   
-    imagePickerController.sourceType =  sourceType;
-    self.imagePickerController = imagePickerController;
-    
-    [self presentViewController:self.imagePickerController animated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -76,7 +66,8 @@ static NSInteger Margin = 20;
 {
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     
-    self.image = chosenImage;
+//    self.image = chosenImage;
+//    [self.imageView setImage:self.image];
     [self.collectionView reloadData];
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -94,7 +85,7 @@ static NSInteger Margin = 20;
 {
     PhotoFilterCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:PhotoFilterCellIdentifier forIndexPath:indexPath];
     
-    [cell configureForImage:self.image withFilter:NSLocalizedString(@"Filter", nil)];
+   // [cell configureForImage:self.image withFilter:NSLocalizedString(@"Filter", nil)];
     
     return cell;
 }
@@ -107,7 +98,7 @@ static NSInteger Margin = 20;
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.imageView setImage:self.image];
+    //[self.imageView setImage:self.image];
 }
 
 @end

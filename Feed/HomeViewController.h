@@ -12,6 +12,8 @@
 #import "TagSearchViewController.h"
 #import "LocationSearchViewController.h"
 #import "PhotoViewController.h"
+#import "NavigationController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface HomeViewController : UIViewController
 
