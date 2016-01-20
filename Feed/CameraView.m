@@ -117,6 +117,9 @@
     {
         [self.captureSession addOutput:captureOutput];
         self.captureOutput = captureOutput;
+        NSDictionary *newSettings =
+        @{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) };
+        self.captureOutput.outputSettings = newSettings;
     }
     else
     {
@@ -131,6 +134,7 @@
     });
     
     self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.captureSession];
+    
     self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     [self.cameraView.layer addSublayer:self.previewLayer];
     [self.delegate cameraViewDidEnterCaptureMode:self];
@@ -159,6 +163,9 @@
         
         UIImage *image = [self imageFromSampleBuffer:imageDataSampleBuffer];
         [self.delegate cameraView:self didCaptureImage:image];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        imageView.frame = self.cameraView.bounds;
+        [self.cameraView addSubview:imageView];
         self.cameraButton.hidden = YES;
         [self.delegate cameraViewDidExitCaptureMode:self];
     }];

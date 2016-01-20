@@ -19,6 +19,7 @@ static NSInteger Margin = 20;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
 @property (weak, nonatomic) IBOutlet CameraView *cameraView;
+@property (strong, nonatomic) UIImage *image;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewBottomConstraint;
 
@@ -107,6 +108,8 @@ static NSInteger Margin = 20;
 
 - (void)cameraView:(CameraView *)cameraView didCaptureImage:(UIImage *)image
 {
+    self.image = image;
+    [self.collectionView reloadData];
     [self showFilterDrawer];
 }
 
@@ -135,7 +138,7 @@ static NSInteger Margin = 20;
 {
     PhotoFilterCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:PhotoFilterCellIdentifier forIndexPath:indexPath];
     
-   // [cell configureForImage:self.image withFilter:NSLocalizedString(@"Filter", nil)];
+   [cell configureForImage:self.image withFilter:NSLocalizedString(@"Filter", nil)];
     
     return cell;
 }
