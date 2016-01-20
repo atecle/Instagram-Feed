@@ -82,7 +82,8 @@ static NSInteger Margin = 20;
 {
     [UIView animateWithDuration:0.2
                      animations:^{
-                         self.collectionViewTopConstraint.constant = 0;
+                         self.collectionViewBottomConstraint.constant = 0;
+                         [self.view layoutIfNeeded];
                      }
                      completion:nil];
 }
@@ -106,7 +107,7 @@ static NSInteger Margin = 20;
 
 - (void)cameraView:(CameraView *)cameraView didCaptureImage:(UIImage *)image
 {
-    
+    [self showFilterDrawer];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
