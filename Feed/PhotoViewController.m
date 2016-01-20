@@ -12,13 +12,15 @@ NSString * const PhotoViewControllerIdentifier = @"PhotoViewController";
 
 static NSInteger Margin = 20;
 
-@interface PhotoViewController() <UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface PhotoViewController() <UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, CameraViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
 @property (weak, nonatomic) IBOutlet CameraView *cameraView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cameraViewHeight;
 
 
 @end
@@ -30,14 +32,33 @@ static NSInteger Margin = 20;
 {
     [super viewDidLoad];
     
+    self.title = NSLocalizedString(@"Filters", nil);
+    
+    self.cameraView.delegate = self;
+
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleDone target:self action:@selector(cancelButtonPressed)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    UIBarButtonItem *testButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Test", nil) style:UIBarButtonItemStyleDone target:self action:@selector(hideFilterDrawer)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    self.navigationItem.rightBarButtonItem = testButton;
+  
+    [self configureFilterDrawer];
+    //[self hideFilterDrawer];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
+
+
+- (void)configureFilterDrawer
+{
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.showsHorizontalScrollIndicator = NO;
-    
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleDone target:self action:@selector(cancelButtonPressed)];
-    self.title = NSLocalizedString(@"Filters", nil);
-    
-    self.navigationItem.leftBarButtonItem = cancelButton;
+    self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setSectionInset:UIEdgeInsetsMake(Margin, Margin, Margin, Margin)];
@@ -48,17 +69,47 @@ static NSInteger Margin = 20;
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([PhotoFilterCell class]) bundle:nil] forCellWithReuseIdentifier:PhotoFilterCellIdentifier];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)hideFilterDrawer
 {
-    [super didReceiveMemoryWarning];
+    [UIView animateWithDuration:0.2
+                     animations:^{
+                         self.collectionViewTopConstraint.constant = 500;
+                         [self.view layoutIfNeeded];
+                     }
+                         completion:nil];
 }
 
+- (void)showFilterDrawer
+{
+    [UIView animateWithDuration:0.2
+                     animations:^{
+                         self.collectionViewTopConstraint.constant = 0;
+                     
+                     }
+                     completion:nil];
+}
 
 - (IBAction)cancelButtonPressed
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - CameraViewDelegate
+
+- (void) cameraViewDidEnterCaptureMode:(CameraView *)cameraView
+{
+    
+}
+
+- (void)cameraViewDidExitCaptureMode:(CameraView *)cameraView
+{
+    
+}
+
+- (void)cameraView:(CameraView *)cameraView didCaptureImage:(UIImage *)image
+{
+    
+}
 
 #pragma mark - UIImagePickerControllerDelegate
 

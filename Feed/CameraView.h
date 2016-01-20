@@ -14,9 +14,15 @@
 @protocol CameraViewDelegate <NSObject>
 
 - (void)cameraView:(CameraView *)cameraView didCaptureImage:(UIImage *)image;
+- (void)cameraViewDidEnterCaptureMode:(CameraView *)cameraView;
+- (void)cameraViewDidExitCaptureMode:(CameraView *)cameraView;
 
 @end
 
 @interface CameraView : UIView
+
+@property (weak, nonatomic) id<CameraViewDelegate> delegate;
+
+- (void)startCaptureSession;
 
 @end

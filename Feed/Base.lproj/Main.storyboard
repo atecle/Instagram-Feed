@@ -65,7 +65,7 @@
                                 </items>
                             </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KOP-Vq-rTj">
-                                <rect key="frame" x="0.0" y="444" width="600" height="150"/>
+                                <rect key="frame" x="0.0" y="444" width="600" height="156"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MIc-fN-EvI">
                                     <size key="itemSize" width="140" height="147"/>
@@ -93,7 +93,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="two-2f-5Gi" secondAttribute="trailing" id="0cu-zY-uIH"/>
-                            <constraint firstItem="KOP-Vq-rTj" firstAttribute="height" secondItem="RH5-Yt-Aq1" secondAttribute="height" multiplier="1/4" id="G3D-09-z4I"/>
+                            <constraint firstItem="KOP-Vq-rTj" firstAttribute="height" secondItem="RH5-Yt-Aq1" secondAttribute="height" multiplier="1/4" constant="6" id="G3D-09-z4I"/>
                             <constraint firstItem="two-2f-5Gi" firstAttribute="width" secondItem="RH5-Yt-Aq1" secondAttribute="width" id="Gti-Ka-ETM"/>
                             <constraint firstItem="two-2f-5Gi" firstAttribute="top" secondItem="JZ3-mp-ulQ" secondAttribute="bottom" id="JzX-Ho-ghv"/>
                             <constraint firstItem="JZ3-mp-ulQ" firstAttribute="trailing" secondItem="KOP-Vq-rTj" secondAttribute="trailing" id="Qa7-j5-sea"/>
@@ -108,8 +108,10 @@
                     </view>
                     <connections>
                         <outlet property="cameraView" destination="two-2f-5Gi" id="lb3-A6-lQm"/>
+                        <outlet property="cameraViewHeight" destination="ng6-cE-LAF" id="ynd-aF-8Nf"/>
                         <outlet property="cancelButton" destination="04p-DB-2hx" id="wOe-7g-cwL"/>
                         <outlet property="collectionView" destination="KOP-Vq-rTj" id="kT7-6w-MyE"/>
+                        <outlet property="collectionViewTopConstraint" destination="YdL-jd-Eaj" id="8fx-dQ-rQs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b9d-sL-QhW" userLabel="First Responder" sceneMemberID="firstResponder"/>
