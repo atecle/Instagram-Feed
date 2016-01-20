@@ -20,7 +20,7 @@ static NSInteger Margin = 20;
 
 @property (weak, nonatomic) IBOutlet CameraView *cameraView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewTopConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cameraViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewBottomConstraint;
 
 
 @end
@@ -73,7 +73,7 @@ static NSInteger Margin = 20;
 {
     [UIView animateWithDuration:0.2
                      animations:^{
-                         self.collectionViewTopConstraint.constant = 500;
+                         self.collectionViewBottomConstraint.constant = -200;
                          [self.view layoutIfNeeded];
                      }
                          completion:nil];

@@ -101,16 +101,22 @@
                             <constraint firstItem="two-2f-5Gi" firstAttribute="leading" secondItem="RH5-Yt-Aq1" secondAttribute="leading" id="hF5-BM-jxz"/>
                             <constraint firstItem="JZ3-mp-ulQ" firstAttribute="leading" secondItem="two-2f-5Gi" secondAttribute="leading" id="lEr-Sh-wuu"/>
                             <constraint firstItem="two-2f-5Gi" firstAttribute="height" secondItem="RH5-Yt-Aq1" secondAttribute="height" multiplier="2/3" id="ng6-cE-LAF"/>
+                            <constraint firstItem="UBU-5x-atJ" firstAttribute="top" secondItem="KOP-Vq-rTj" secondAttribute="bottom" id="oik-xf-4qm"/>
                             <constraint firstItem="KOP-Vq-rTj" firstAttribute="leading" secondItem="RH5-Yt-Aq1" secondAttribute="leading" id="q2a-4l-BSI"/>
                             <constraint firstAttribute="trailing" secondItem="KOP-Vq-rTj" secondAttribute="trailing" id="qkV-NT-BJD"/>
                             <constraint firstItem="JZ3-mp-ulQ" firstAttribute="top" secondItem="RH5-Yt-Aq1" secondAttribute="top" id="sGd-3F-RYv"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ng6-cE-LAF"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="cameraView" destination="two-2f-5Gi" id="lb3-A6-lQm"/>
-                        <outlet property="cameraViewHeight" destination="ng6-cE-LAF" id="ynd-aF-8Nf"/>
                         <outlet property="cancelButton" destination="04p-DB-2hx" id="wOe-7g-cwL"/>
                         <outlet property="collectionView" destination="KOP-Vq-rTj" id="kT7-6w-MyE"/>
+                        <outlet property="collectionViewBottomConstraint" destination="oik-xf-4qm" id="eqj-hJ-p03"/>
                         <outlet property="collectionViewTopConstraint" destination="YdL-jd-Eaj" id="8fx-dQ-rQs"/>
                     </connections>
                 </viewController>
