@@ -32,20 +32,24 @@ static NSInteger Margin = 20;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self.cameraView layoutIfNeeded];
+
     self.title = NSLocalizedString(@"Filters", nil);
     
     self.cameraView.delegate = self;
-
+    
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleDone target:self action:@selector(cancelButtonPressed)];
     self.navigationItem.leftBarButtonItem = cancelButton;
-    UIBarButtonItem *testButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Test", nil) style:UIBarButtonItemStyleDone target:self action:@selector(hideFilterDrawer)];
-    self.navigationItem.leftBarButtonItem = cancelButton;
-    self.navigationItem.rightBarButtonItem = testButton;
   
     [self configureFilterDrawer];
-    [self.cameraView layoutIfNeeded];
     [self hideFilterDrawer];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.cameraView startCaptureSession];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,10 +66,10 @@ static NSInteger Margin = 20;
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setSectionInset:UIEdgeInsetsMake(Margin, Margin, Margin, Margin)];
-    flowLayout.itemSize = CGSizeMake(self.collectionView.bounds.size.width/9, self.collectionView.bounds.size.height - (3*Margin));
+    flowLayout.itemSize = CGSizeMake(self.collectionView.bounds.size.width/10, self.collectionView.bounds.size.height - (3*Margin));
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    
     self.collectionView.collectionViewLayout = flowLayout;
+  
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([PhotoFilterCell class]) bundle:nil] forCellWithReuseIdentifier:PhotoFilterCellIdentifier];
 }
 
@@ -96,12 +100,12 @@ static NSInteger Margin = 20;
 
 #pragma mark - CameraViewDelegate
 
-- (void) cameraViewDidEnterCaptureMode:(CameraView *)cameraView
+- (void)cameraViewDidExitCaptureMode:(CameraView *)cameraView
 {
     
 }
 
-- (void)cameraViewDidExitCaptureMode:(CameraView *)cameraView
+- (void)cameraViewDidEnterCaptureMode:(CameraView *)cameraView
 {
     
 }
@@ -111,6 +115,12 @@ static NSInteger Margin = 20;
     self.image = image;
     [self.collectionView reloadData];
     [self showFilterDrawer];
+}
+
+- (void)cameraViewTakeAgainButtonPressed:(CameraView *)cameraView
+{
+    self.image = nil;
+    [self hideFilterDrawer];
 }
 
 #pragma mark - UIImagePickerControllerDelegate

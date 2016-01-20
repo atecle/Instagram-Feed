@@ -3,7 +3,7 @@
 //  Feed
 //
 //  Created by Adam on 1/19/16.
-//  Copyright © 2016 atecle. All rights reserved.
+//  Copyright © 2016 ;. All rights reserved.
 //
 
 #import "CameraView.h"
@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UIButton *cameraButton;
 @property (strong, nonatomic) UIView *cameraView;
 @property (nonatomic) BOOL hasImage;
+@property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) UIImage *image;
 
 @end
@@ -30,6 +31,7 @@
     
     [self configureCameraView];
     [self configureCameraButton];
+    [self configureTakeAgainButton];
     [self configureCaptureSession];
 }
 
@@ -58,7 +60,7 @@
     
     [self addConstraint:topConstraint];
     [self addConstraint:leftConstraint];
-    [self  addConstraint:rightConstraint];
+    [self addConstraint:rightConstraint];
     [self addConstraint:bottomConstraint];
     self.cameraView = cameraView;
     
@@ -77,13 +79,23 @@
     
     NSLayoutConstraint *centerConstraint = [NSLayoutConstraint constraintWithItem:self.cameraView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.cameraButton attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
     NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.cameraButton attribute:NSLayoutAttributeBottom multiplier:1 constant:20];
-     NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.cameraButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:60];
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.cameraButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:60];
     NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self.cameraButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:60];
     
     [self addConstraint:centerConstraint];
     [self addConstraint:bottomConstraint];
     [self addConstraint:heightConstraint];
     [self addConstraint:widthConstraint];
+}
+
+- (void)configureTakeAgainButton
+{
+    UIButton *takeAgainButton = [[UIButton alloc] init];
+    takeAgainButton.layer.masksToBounds = NO;
+    takeAgainButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [takeAgainButton setTitle:NSLocalizedString(@"Take Again", nil) forState:UIControlStateNormal];
+    
+    [takeAgainButton addTarget:self action:@selector(takeAgainButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)configureCaptureSession
@@ -126,22 +138,21 @@
         return;
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
- 
-        [self.captureSession startRunning];
-        [self.delegate cameraViewDidEnterCaptureMode:self];
-    });
-    
     self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.captureSession];
     
     self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     [self.cameraView.layer addSublayer:self.previewLayer];
+}
+
+- (void)startCaptureSession
+{
+    [self.captureSession startRunning];
     [self.delegate cameraViewDidEnterCaptureMode:self];
 }
 
+
 - (void)cameraButtonPressed
 {
-    NSLog(@"test");
     AVCaptureConnection *stillImageConnection = nil;
     
     for (AVCaptureConnection *connection in self.captureOutput.connections)
@@ -160,13 +171,26 @@
     [self.captureOutput captureStillImageAsynchronouslyFromConnection:stillImageConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
         
         UIImage *image = [self imageFromSampleBuffer:imageDataSampleBuffer];
-        [self.delegate cameraView:self didCaptureImage:image];
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-        imageView.frame = self.cameraView.bounds;
-        [self.cameraView addSubview:imageView];
         self.cameraButton.hidden = YES;
+        
+        [self.delegate cameraView:self didCaptureImage:image];
+        [self displayCapturedImage:image];
         [self.delegate cameraViewDidExitCaptureMode:self];
     }];
+}
+
+- (void)takeAgainButtonPressed
+{
+    [self.imageView removeFromSuperview];
+    self.cameraButton.hidden = NO;
+}
+
+- (void)displayCapturedImage:(UIImage *)image
+{
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    self.imageView = imageView;
+    imageView.frame = self.cameraView.bounds;
+    [self.cameraView addSubview:imageView];
 }
 
 - (UIImage *) imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer

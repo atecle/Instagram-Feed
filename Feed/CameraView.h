@@ -14,6 +14,8 @@
 @protocol CameraViewDelegate <NSObject>
 
 - (void)cameraView:(CameraView *)cameraView didCaptureImage:(UIImage *)image;
+- (void)cameraViewTakeAgainButtonPressed:(CameraView *)cameraView;
+
 - (void)cameraViewDidEnterCaptureMode:(CameraView *)cameraView;
 - (void)cameraViewDidExitCaptureMode:(CameraView *)cameraView;
 
