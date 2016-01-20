@@ -67,11 +67,10 @@
 - (void)configureCameraButton
 {
     UIButton *cameraButton = [[UIButton alloc] init];
-    [cameraButton setBackgroundImage:[UIImage imageNamed:@"white-camera-icon"] forState:UIControlStateNormal];
-    cameraButton.layer.cornerRadius = cameraButton.bounds.size.width/2.0;
     cameraButton.layer.masksToBounds = NO;
-    [cameraButton layoutIfNeeded];
     cameraButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [cameraButton setBackgroundImage:[UIImage imageNamed:@"white-camera-icon"] forState:UIControlStateNormal];
+    [cameraButton layoutIfNeeded];
     [cameraButton addTarget:self action:@selector(cameraButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:cameraButton];
     self.cameraButton = cameraButton;
@@ -138,7 +137,6 @@
     self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     [self.cameraView.layer addSublayer:self.previewLayer];
     [self.delegate cameraViewDidEnterCaptureMode:self];
-    
 }
 
 - (void)cameraButtonPressed
@@ -203,7 +201,7 @@
     CGColorSpaceRelease(colorSpace);
     
     // Create an image object from the Quartz image
-    UIImage *image = [UIImage imageWithCGImage:quartzImage];
+    UIImage *image =  [UIImage imageWithCGImage:quartzImage scale:1.0 orientation:UIImageOrientationRight];
     
     // Release the Quartz image
     CGImageRelease(quartzImage);
