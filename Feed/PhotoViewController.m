@@ -43,15 +43,14 @@ static NSInteger Margin = 20;
     self.navigationItem.rightBarButtonItem = testButton;
   
     [self configureFilterDrawer];
-    //[self hideFilterDrawer];
+    [self.cameraView layoutIfNeeded];
+    [self hideFilterDrawer];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
-
-
 
 - (void)configureFilterDrawer
 {
@@ -73,7 +72,7 @@ static NSInteger Margin = 20;
 {
     [UIView animateWithDuration:0.2
                      animations:^{
-                         self.collectionViewBottomConstraint.constant = -200;
+                         self.collectionViewBottomConstraint.constant = -1 * self.collectionView.bounds.size.height;
                          [self.view layoutIfNeeded];
                      }
                          completion:nil];
@@ -84,7 +83,6 @@ static NSInteger Margin = 20;
     [UIView animateWithDuration:0.2
                      animations:^{
                          self.collectionViewTopConstraint.constant = 0;
-                     
                      }
                      completion:nil];
 }

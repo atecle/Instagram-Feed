@@ -29,8 +29,7 @@
     [super awakeFromNib];
     
     [self configureCameraView];
-  // [self configureCameraButton];
-    
+    [self configureCameraButton];
     [self configureCaptureSession];
 }
 
@@ -61,7 +60,6 @@
     [self addConstraint:leftConstraint];
     [self  addConstraint:rightConstraint];
     [self addConstraint:bottomConstraint];
-    //[cameraView setBackgroundColor:[UIColor blackColor]];
     self.cameraView = cameraView;
     
 }
@@ -69,12 +67,24 @@
 - (void)configureCameraButton
 {
     UIButton *cameraButton = [[UIButton alloc] init];
+    [cameraButton setBackgroundImage:[UIImage imageNamed:@"white-camera-icon"] forState:UIControlStateNormal];
+    cameraButton.layer.cornerRadius = cameraButton.bounds.size.width/2.0;
+    cameraButton.layer.masksToBounds = NO;
+    [cameraButton layoutIfNeeded];
+    cameraButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [cameraButton addTarget:self action:@selector(cameraButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:cameraButton];
     self.cameraButton = cameraButton;
-    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:self.cameraView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.cameraButton attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-    [self.cameraView addConstraint:topConstraint];
-    self.cameraButton.layer.cornerRadius = self.cameraButton.bounds.size.width / 2.0;
     
+    NSLayoutConstraint *centerConstraint = [NSLayoutConstraint constraintWithItem:self.cameraView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.cameraButton attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.cameraButton attribute:NSLayoutAttributeBottom multiplier:1 constant:20];
+     NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.cameraButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:60];
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self.cameraButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:60];
+    
+    [self addConstraint:centerConstraint];
+    [self addConstraint:bottomConstraint];
+    [self addConstraint:heightConstraint];
+    [self addConstraint:widthConstraint];
 }
 
 - (void)configureCaptureSession
@@ -123,11 +133,13 @@
     self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.captureSession];
     self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     [self.cameraView.layer addSublayer:self.previewLayer];
-   
+    [self.delegate cameraViewDidEnterCaptureMode:self];
     
 }
-- (IBAction)cameraButtonPressed:(id)sender
+
+- (void)cameraButtonPressed
 {
+    NSLog(@"test");
     AVCaptureConnection *stillImageConnection = nil;
     
     for (AVCaptureConnection *connection in self.captureOutput.connections)
@@ -146,7 +158,6 @@
     [self.captureOutput captureStillImageAsynchronouslyFromConnection:stillImageConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
         
         [self.delegate cameraViewDidExitCaptureMode:self];
-        NSLog(@"Test");
     }];
     
 }
