@@ -1,3 +1,3 @@
 # Instagram-Feed
 
-A mini instagram clone 
+A mini Instagram clone 
